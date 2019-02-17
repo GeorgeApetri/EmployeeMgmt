@@ -1,6 +1,7 @@
 package com.sda.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="department")
@@ -10,20 +11,34 @@ public class Department{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "manager_name", length = 40)
-    private String managerName;
+    @Column(name = "name", length = 40)
+    private String name;
+
+    @OneToMany(mappedBy = "department")
+    private Set<Employee> employees;
 
     public Long getId() {
         return id;
     }
-    public String getManagerName() {
-        return managerName;
-    }
+
     public void setId(Long id) {
         this.id = id;
     }
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 }
 

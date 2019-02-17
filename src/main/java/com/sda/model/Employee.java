@@ -2,12 +2,7 @@ package com.sda.model;
 
 import org.hibernate.annotations.LazyToOne;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="employees")
@@ -20,6 +15,16 @@ public class Employee {
 
     @Column(name = "name", length = 40)
     private String name;
+
+    @Column(name = "manager", length = 40)
+    private String manager;
+
+    @ManyToOne
+    @JoinColumn(name = "department", nullable = false)
+    private Department department;
+
+    @Column(name = "hire_date")
+    private java.sql.Date hireDate;
 
     public Long getId() {
         return id;
@@ -35,5 +40,21 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
